@@ -14,9 +14,7 @@ class NewsController extends \Library\BackController
     // On récupère le manager des news.
     $manager = $this->managers->getManagerOf('News');
     
-    // Cette ligne, vous ne pouviez pas la deviner sachant qu'on n'a pas encore touché au modèle.
-    // Contentez-vous donc d'écrire cette instruction, nous implémenterons la méthode ensuite.
-    $listeNews = $manager->getList(0, $nombreNews);
+	$listeNews = $manager->getList(0, $nombreNews);
     
     foreach ($listeNews as $news)
     {

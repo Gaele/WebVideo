@@ -6,3 +6,7 @@ foreach ($listeNews as $news)
   <p><?php echo nl2br($news['contenu']); ?></p>
 <?php
 }
+?>
+
+<!--<iframe width="425" height="344" src="http://www.youtube.com/embed/lniVx_pFM_A?fs=1&quot; frameborder="0" allowFullScreen=""></iframe>-->
+<!--<img src="http://cdn.pratique.fr/sites/default/files/articles/lapin-blanc.jpg" alt="lapin" /> -->

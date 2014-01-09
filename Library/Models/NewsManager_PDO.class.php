@@ -5,6 +5,12 @@ use \Library\Entities\News;
 
 class NewsManager_PDO extends NewsManager
 {
+
+  public function count()
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM news')->fetchColumn();
+  }
+  
   public function getList($debut = -1, $limite = -1)
   {
     $sql = 'SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news ORDER BY id DESC';
@@ -48,4 +54,17 @@ class NewsManager_PDO extends NewsManager
     
     return null;
   }
+  
+  protected function add(News $news)
+  {
+    $requete = $this->dao->prepare('INSERT INTO news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateAjout = NOW(), dateModif = NOW()');
+    
+    $requete->bindValue(':titre', $news->titre());
+    $requete->bindValue(':auteur', $news->auteur());
+    $requete->bindValue(':contenu', $news->contenu());
+    
+    $requete->execute();
+  }
+  
+  
 }
