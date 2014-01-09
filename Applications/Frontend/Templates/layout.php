@@ -15,8 +15,8 @@
   <body>
     <div id="wrap">
       <div id="header">
-        <h1 id="logo-text"><a href="/WebVideo/">Mon super site</a></h1>
-        <p id="slogan">Comment ça « il n'y a presque rien » ?</p>
+        <h1 id="logo-text"><a href="/WebVideo/">Geek un film</a></h1>
+        <p id="slogan">Louez, achetez, offrez</p>
       </div>
       
       <div  id="menu">
@@ -24,7 +24,7 @@
           <li><a href="/WebVideo/">Videos</a></li>
           <?php if ($user->isAuthenticated()) { ?>
           <li><a href="/WebVideo/admin/">Mon Compte</a></li>
-          <li><a href="/WebVideo/admin/news-insert.html">Ajouter une news</a></li>
+          <li><a href="/WebVideo/admin/news-insert.html">Offrir un film</a></li>
           <?php } ?>
         </ul>
       </div>
