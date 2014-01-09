@@ -2,6 +2,7 @@
 <routes>
 	<route url="/WebVideo/admin/" module="News" action="index" />
 	<route url="/WebVideo/admin/news-insert\.html" module="News" action="insert" />
-	<!--<route url="/WebVideo/admin/news-update-([0-9]+)\.html" module="News" action="update" vars="id" />-->
+	<route url="/WebVideo/admin/news-update-([0-9]+)\.html" module="News" action="update" vars="id" />
+	<route url="/WebVideo/admin/news-delete-([0-9]+)\.html" module="News" action="delete" vars="id" />
 </routes>
 

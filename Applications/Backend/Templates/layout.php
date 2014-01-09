@@ -24,7 +24,7 @@
       
       <div  id="menu">
         <ul>
-          <li><a href="/WebVideo/admin/">Accueil</a></li>
+          <li><a href="/WebVideo/">Accueil</a></li>
           <?php if ($user->isAuthenticated()) { ?>
           <li><a href="/WebVideo/admin/">Admin</a></li>
           <li><a href="/WebVideo/admin/news-insert.html">Ajouter une news</a></li>
