@@ -4,7 +4,7 @@ namespace Library;
 abstract class Entity implements \ArrayAccess
 {
   protected $erreurs = array(),
-        $id;
+  $id;
   
   public function __construct(array $donnees = array())
   {

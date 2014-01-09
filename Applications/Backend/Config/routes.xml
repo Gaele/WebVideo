@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
 	<route url="/WebVideo/admin/" module="News" action="index" />
-	<route url="/WenVideo/admin/news-insert\.html" module="News" action="insert" />
+	<route url="/WebVideo/admin/news-insert\.html" module="News" action="insert" />
+	<!--<route url="/WebVideo/admin/news-update-([0-9]+)\.html" module="News" action="update" vars="id" />-->
 </routes>
 
