@@ -21,6 +21,7 @@ abstract class Application
   
   public function getController()
   {
+
     $router = new \Library\Router;
     
     $xml = new \DOMDocument;

@@ -21,8 +21,8 @@
       
       <div  id="menu">
         <ul>
-          <li><a href="/WebVideo/">Videos</a></li>
           <?php if ($user->isAuthenticated()) { ?>
+		  <li><a href="/WebVideo/">Videos</a></li>
           <li><a href="/WebVideo/admin/">Mon Compte</a></li>
           <li><a href="/WebVideo/admin/news-insert.html">Offrir un film</a></li>
           <?php } ?>
@@ -36,8 +36,8 @@
           <?php echo $content; ?>
         </div>
       </div>
-    
       <div id="footer"></div>
     </div>
+	
   </body>
 </html>

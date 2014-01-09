@@ -48,6 +48,3 @@ Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, 
     Votre navigateur n'est pas compatible avec le HTML 5, désolé.
 </video>
 
-
-
-

@@ -1,6 +1,3 @@
-<?php
-//require dirname(__FILE__).'/../../Frontend/Templates/layout.php';
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
   <head>
@@ -18,16 +15,16 @@
   <body>
     <div id="wrap">
       <div id="header">
-        <h1 id="logo-text"><a href="/WebVideo/">Mon super site</a></h1>
-        <p id="slogan">Comment ça « il n'y a presque rien » ?</p>
+        <h1 id="logo-text"><a href="/WebVideo/">Geek un film</a></h1>
+        <p id="slogan">Louez, achetez, offrez</p>
       </div>
       
       <div  id="menu">
         <ul>
-          <li><a href="/WebVideo/">Accueil</a></li>
-          <?php if ($user->isAuthenticated()) { ?>
-          <li><a href="/WebVideo/admin/">Admin</a></li>
-          <li><a href="/WebVideo/admin/news-insert.html">Ajouter une news</a></li>
+		<?php if ($user->isAuthenticated()) { ?>
+          <li><a href="/WebVideo/">Videos</a></li>
+          <li><a href="/WebVideo/admin/">Mon Compte</a></li>
+          <li><a href="/WebVideo/admin/news-insert.html">Offrir un film</a></li>
           <?php } ?>
         </ul>
       </div>
@@ -39,8 +36,8 @@
           <?php echo $content; ?>
         </div>
       </div>
-    
       <div id="footer"></div>
     </div>
+	
   </body>
 </html>
