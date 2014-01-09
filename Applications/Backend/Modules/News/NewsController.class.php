@@ -12,7 +12,7 @@ class NewsController extends \Library\BackController
     $this->page->addVar('listeNews', $manager->getList());
     $this->page->addVar('nombreNews', $manager->count());
   }
-  /*
+  
   public function executeInsert(\Library\HTTPRequest $request)
   {
     if ($request->postExists('auteur'))
@@ -52,5 +52,5 @@ class NewsController extends \Library\BackController
     
     $this->page->addVar('news', $news);
   }
-  */
+  
 }

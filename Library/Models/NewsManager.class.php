@@ -1,6 +1,8 @@
 <?php
 namespace Library\Models;
 
+use \Library\Entities\News;
+
 abstract class NewsManager extends \Library\Manager
 {
   /**
@@ -29,7 +31,7 @@ abstract class NewsManager extends \Library\Manager
    * @param $news News La news à ajouter
    * @return void
    */
-  //abstract protected function add(News $news);
+  abstract protected function add(News $news);
   
   /**
    * Méthode permettant d'enregistrer une news.
@@ -37,7 +39,7 @@ abstract class NewsManager extends \Library\Manager
    * @see self::add()
    * @see self::modify()
    * @return void
-   *//*
+   */
   public function save(News $news)
   {
     if ($news->isValid())
@@ -48,6 +50,6 @@ abstract class NewsManager extends \Library\Manager
     {
       throw new \RuntimeException('La news doit être validée pour être enregistrée');
     }
-  }*/
+  }
 
 }

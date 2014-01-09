@@ -1,0 +1,29 @@
+﻿Try to push videos
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   Applications/Backend/Config/routes.xml
+#	new file:   Applications/Backend/Modules/News/NewsController.class.php
+#	new file:   Applications/Backend/Modules/News/Views/_form.php
+#	new file:   Applications/Backend/Modules/News/Views/index.php
+#	new file:   Applications/Backend/Modules/News/Views/insert.php
+#	modified:   Applications/Frontend/Modules/News/NewsController.class.php
+#	modified:   Applications/Frontend/Modules/News/Views/index.php
+#	modified:   Library/Application.class.php
+#	modified:   Library/Models/NewsManager.class.php
+#	modified:   Library/Models/NewsManager_PDO.class.php
+#	new file:   Web/images/lapin-blanc.jpg
+#	new file:   "Web/videos/Qu\303\251becOriginal - Raconter le Qu\303\251bec (version longue).mp4"
+#	new file:   "Web/videos/Qu\303\251becOriginal -Tripant _ Vivre l_\303\251t\303\251 au Qu\303\251bec.mp4"
+#	new file:   Web/videos/eeaa7c3a-5c93-48f3-9237-2151c465196c.mp4
+#	new file:   bidg3a0o.k2j.txt
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	4egnu4ms.iii.txt
+#	zadhny44.gcx.txt
+
