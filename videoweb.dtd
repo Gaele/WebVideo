@@ -1,0 +1,8 @@
+<!ELEMENT films (film*)>
+<!ELEMENT film (titre, annee, description, duree, url) >
+<!ATTLIST movie id ID #REQUIRED >
+<!ELEMENT titre (#PCDATA)>
+<!ELEMENT annee (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT duree (#PCDATA)>
+<!ELEMENT url (#PCDATA)>
