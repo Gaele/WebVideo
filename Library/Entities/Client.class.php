@@ -11,22 +11,20 @@ class Client extends \Library\Entity
 			$cleCarteBancaire,
 			$mail,
 			$nomDuTitulaire,
-			$dateFinValidite;
+			$dateInscription;
 			
   
   const PSEUDONYME_INVALIDE =   1;
   const MOTDEPASSE_INVALIDE =   2;
   const MONTANT_VIDE =          3;
   const MONTANT_NEGATIF =       4;
-  const CARTE_NOTSTRING =       5;
+  const CARTE_NOTDIGITSTRING =  5;
   const CARTE_WRONG_SIZE =      6;
   const CARTE_FAKE =            7;
-  const MAIL_NOTSTRING =        8;
-  const MAIL_INVALID =          9;
-  const TITULAIRE_INVALIDE =    10;
-  
-  const CLE_INVALIDE =          6;
-  const MAIL_INVALIDE =         7;
+  const CLE_INVALIDE =          8;
+  const MAIL_NOTSTRING =        9;
+  const MAIL_INVALID =          10;
+  const TITULAIRE_INVALIDE =    11;
   
   // to check again ?
   public function isValid()
@@ -80,9 +78,9 @@ class Client extends \Library\Entity
            
   public function setNumeroCarteBanquaire($numero)
   {
-    if (!is_string($numero) || empty($numero))
+    if (!is_string($numero) || empty($numero) || !ctype_digit($numero))
     {
-      $this->erreurs[] = self::CARTE_NOTSTRING;
+      $this->erreurs[] = self::CARTE_NOTDIGITSTRING;
     }
 	else if (strlen($numero) < 14 || strlen($numero) > 19)
 	{
@@ -98,6 +96,10 @@ class Client extends \Library\Entity
     }
   }
   
+  // American Express : 3111-1111-1111-1117
+  // Visa : 4111-1111-1111-1111
+  // MasterCard : 5111-1111-1111-1118
+  // Découvrir : 6111-1111-1111-1116
   private function checkLuhn($purportedCC)
   {
      $sum = 0;
@@ -158,9 +160,9 @@ class Client extends \Library\Entity
     }
   }
   
-  public function setDateFinValidite(\DateTime $date)
+  public function setDateInscription(\DateTime $date)
   {
-    $this->dateFinValidite = $date;
+    $this->dateInscription = $date;
   }
   
   // GETTERS
@@ -200,7 +202,7 @@ class Client extends \Library\Entity
     return $this->nomDuTitulaire;
   }
   
-  public function dateFinValidite()
+  public function dateInscription()
   {
     return $this->dateFinValidite;
   }

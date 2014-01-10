@@ -5,39 +5,40 @@ use \Library\Entities\Client;
 
 class ClientsManager_PDO extends CommentsManager
 {
+
   protected function add(Client $client)
   {
-    $q = $this->dao->prepare('INSERT INTO clients SET news = :news, auteur = :auteur, contenu = :contenu, date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO clients SET pseudonyme = :pseudo, motDePasse = :mdp, montantCharge = :montant, numeroCarteBanquaire = :numeroCarte, 
+	cleCarteBanquaire = :cle, mail = :mail, nomDuTitulaire = :nomTitulaire, dateInscription = NOW()');
     
-    $q->bindValue(':news', $comment->news(), \PDO::PARAM_INT);
-    $q->bindValue(':auteur', $comment->auteur());
-    $q->bindValue(':contenu', $comment->contenu());
-    
+    $q->bindValue(':pseudo', $client->pseudonyme());
+    $q->bindValue(':mdp', $client->motDePasse());
+	$q->bindValue(':montant', $client->montantCharge(), \PDO::PARAM_INT);
+	$q->bindValue(':numeroCarte', $client->numeroCarteBanquaire());
+	$q->bindValue(':cle', $client->cleCarteBanquaire(), \PDO::PARAM_INT);
+	$q->bindValue(':mail', $client->mail());
+	$q->bindValue(':nomTitulaire', $client->nomDuTitulaire());
+	
     $q->execute();
     
-    $comment->setId($this->dao->lastInsertId());
+    $client->setId($this->dao->lastInsertId());
   }
   
-  public function getListOf($news)
+  public function getListOf()
   {
-    if (!ctype_digit($news))
-    {
-      throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
-    }
-    
-    $q = $this->dao->prepare('SELECT id, news, auteur, contenu, date FROM comments WHERE news = :news');
-    $q->bindValue(':news', $news, \PDO::PARAM_INT);
+    $q = $this->dao->prepare('SELECT id, pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, cleCarteBancaire, mail, nomDuTitulaire, dateInscription FROM clients');
+	
     $q->execute();
     
-    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Comment');
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Clients');
     
-    $comments = $q->fetchAll();
+    $clients = $q->fetchAll();
     
-    foreach ($comments as $comment)
+    foreach ($clients as $client)
     {
-      $comment->setDate(new \DateTime($comment->date()));
+      $client->setDate(new \DateTime($client->date()));
     }
     
-    return $comments;
+    return $clients;
   }
 }
