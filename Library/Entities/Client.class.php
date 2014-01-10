@@ -14,19 +14,19 @@ class Client extends \Library\Entity
 			$dateExpiration;
 			
   
-  const PSEUDONYME_INVALIDE =   1;
-  const MOTDEPASSE_INVALIDE =   2;
-  const MONTANT_VIDE =          3;
-  const MONTANT_NEGATIF =       4;
-  const CARTE_NOTDIGITSTRING =  5;
-  const CARTE_WRONG_SIZE =      6;
-  const CARTE_FAKE =            7;
-  const CLE_INVALIDE =          8;
-  const CLE_ABSCENTE =          9;
-  const MAIL_NOTSTRING =        10;
-  const MAIL_INVALID =          11;
-  const TITULAIRE_INVALIDE =    12;
-  const DATE_EXPIRATION_ABSURDE =    13;
+  const PSEUDONYME_INVALIDE =      1;
+  const MOTDEPASSE_INVALIDE =      2;
+  const MONTANT_VIDE =             3;
+  const MONTANT_NEGATIF =          4;
+  const CARTE_NOTDIGITSTRING =     5;
+  const CARTE_WRONG_SIZE =         6;
+  const CARTE_FAKE =               7;
+  const CLE_INVALIDE =             8;
+  const CLE_ABSCENTE =             9;
+  const MAIL_NOTSTRING =           10;
+  const MAIL_INVALID =             11;
+  const TITULAIRE_INVALIDE =       12;
+  const DATE_EXPIRATION_ABSURDE =  13;
   
   public function isValid()
   {
@@ -165,7 +165,7 @@ class Client extends \Library\Entity
     }
   }
   
-  public function setDateInscription(\DateTime $date)
+  public function setDateInscription($date)
   {
     $this->dateInscription = $date;
   }
@@ -221,7 +221,7 @@ class Client extends \Library\Entity
   
   public function dateInscription()
   {
-    return $this->dateFinValidite;
+    return $this->dateInscription;
   }
   
   public function dateExpiration()

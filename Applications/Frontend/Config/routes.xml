@@ -3,6 +3,7 @@
   <route url="/WebVideo/" module="News" action="index" />
   <route url="/WebVideo/inscription" module="Connexion" action="inscription" />
   <route url="/WebVideo/deconnexion.html" module="Connexion" action="deconnexion" />
+  <route url="/WebVideo/gestionCompte.html" module="Connexion" action="gestionCompte" />
   <route url="/WebVideo/news-([0-9]+)\.html" module="News" action="show" vars="id"/>
   <route url="/WebVideo/commenter-([0-9]+)\.html" module="News" action="insertComment" vars="news" />
 </routes>

@@ -7,7 +7,7 @@ class ConnexionController extends \Library\BackController
   {
     $this->page->addVar('title', 'Connexion');
     
-    if ($request->postExists('login'))
+	if ($request->postExists('login'))
     {
       $login = $request->postData('login');
       $password = $request->postData('password');
@@ -15,12 +15,12 @@ class ConnexionController extends \Library\BackController
 	  if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
 	  {
 	    $this->app->user()->setAdministrator(true);
-		$this->app->user()->setAuthenticated(true);
+		$this->app->user()->setAuthenticated("Admin");
         $this->app->httpResponse()->redirect('.');
 	  }
       else if ($manager->hasSubscribed($login, $password))
       {
-        $this->app->user()->setAuthenticated(true);
+        $this->app->user()->setAuthenticated($login);
         $this->app->httpResponse()->redirect('.');
       }
       else
@@ -46,7 +46,7 @@ class ConnexionController extends \Library\BackController
 		'mail' => $request->postData('mail'),
 		'nomDuTitulaire' => $request->postData('nomDuTitulaire')
       ));
-	  echo $client->debug();
+	  // echo $client->debug();
       if ($client->isValid())
       {
 		$manager = $this->managers->getManagerOf('Clients');
@@ -68,7 +68,7 @@ class ConnexionController extends \Library\BackController
         $this->page->addVar('erreurs', $client->erreurs());
       }
       
-      $this->page->addVar('comment', $client);
+      $this->page->addVar('client', $client);
     }
   }
   
@@ -80,7 +80,23 @@ class ConnexionController extends \Library\BackController
 	session_destroy();
 
 	$this->app->httpResponse()->redirect('.');
-    
+  }
+  
+  public function executeGestionCompte(\Library\HTTPRequest $request)
+  {
+    $this->page->addVar('title', 'Gestion du compte');
+    $pseudo = $this->app->user()->getAuthenticated();
+	$manager = $this->managers->getManagerOf('Clients');
+	$client = $manager->get($pseudo);
+	
+	if ($request->postExists('recharge'))
+	{
+		$client->setMontantCharge($client->montantCharge() + (int)$request->postData('recharge'));
+		$manager->update($client);
+	}
+	
+	$this->page->addVar('client', $client);
   }
   
 }
+

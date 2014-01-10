@@ -49,5 +49,14 @@ abstract class ClientsManager extends \Library\Manager
    * @return boolean
    */
   abstract public function hasSubscribed($pseudo, $pass);
+
+
+  /**
+   * Return the person with the given pseudonyme
+   * @return client
+   */
+  abstract public function get($pseudo);
+
+
   
 }
