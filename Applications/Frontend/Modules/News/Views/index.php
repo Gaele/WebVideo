@@ -50,6 +50,22 @@ else
   </p>
 </form>
 
+<?php
+	foreach($films as $film) {
+		echo'<h2><a href="news-01.html">'.film->titre();
+		echo ' ('.film->dateDeSortie();
+		echo ')</a></h2>';
+		echo '<div class="miniature" style="float:left;width:40%;">';
+		echo '<img style="width:99%;" src="Web/videos/poster/'.film->titre().'.png" />';
+		echo '</div><p><b>Duree</b> : '.film->duree();
+		echo ' min.<br/>';
+		echo '<b>Realisateur</b> : '.film->realisateurs().'<br/>';
+		echo '<b>Acteurs</b> : '.Nec Enim, Illa Prima, Vera Est.'<br/>';
+		echo '<b>Description :</b><br/>'.Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit...;
+		echo '<p>';
+	}
+?>
+
 <h2><a href="news-01.html">Quebec Original Hiver (2010)</a></h2>
 <div class="miniature" style="float:left;width:40%;">
 <img style="width:99%;" src="Web/videos/poster/Quebec Original Hiver.png" />
