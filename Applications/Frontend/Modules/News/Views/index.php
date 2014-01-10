@@ -52,7 +52,7 @@ else
 
 <h2><a href="news-01.html">Quebec Original Hiver (2010)</a></h2>
 <div class="miniature" style="float:left;width:40%;">
-<img style="width:99%;" src="Web/videos/poster/QUH.png" />
+<img style="width:99%;" src="Web/videos/poster/Quebec Original Hiver.png" />
 </div>
 <p>
 <b>Duree</b> : 120 min
@@ -65,11 +65,9 @@ else
 Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit...
 <p>
 
-
-
 <h2>Quebec Original Ete (2011)</h2>
 <div class="miniature" style="float:left;width:40%;">
-<img style="width:99%;" src="Web/videos/poster/QUI.png" />
+<img style="width:99%;" src="Web/videos/poster/Quebec Original Ete.png" />
 </div>
 <p>
 <b>De :</b> Nec Enim<br/>

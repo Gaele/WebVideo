@@ -44,7 +44,7 @@
 <br/>
 Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit, sic in amicum sit animatus. Quam multa enim, quae nostra causa numquam faceremus, facimus causa amicorum! precari ab indigno, supplicare, tum acerbius in aliquem invehi insectarique vehementius, quae in nostris rebus non satis honeste, in amicorum fiunt honestissime; multaeque res sunt in quibus de suis commodis viri boni multa detrahunt detrahique patiuntur, ut iis amici potius quam ipsi fruantur.
 <p>
-<video width="99%" height="99%" poster="Web/videos/poster/QUH.png" src="Web/videos/QUH.mp4"  controls>
+<video width="99%" height="99%" poster="Web/videos/poster/Quebec Original Hiver.png" src="Web/videos/Quebec Original Hiver.mp4"  controls>
     Votre navigateur n'est pas compatible avec le HTML 5, désolé.
 </video>
 

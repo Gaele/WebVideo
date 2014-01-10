@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ACSII" ?>
+<?xml-stylesheet type="text/xsl" href="yourxsl.xsl"?>
+<!DOCTYPE movies SYSTEM "movies.dtd" >
+<movies>
+<movie id="tt0111161">
+
+	<title>Quebec Original Ete</title>
+
+	<summary>Andy Dufresne, is sent to Shawshank Prison for the murder of his wife and secret lover. He is very isolated and lonely at first, but realizes there is something deep inside your body, that people can't touch and get to....'HOPE'. Andy becomes friends with prison 'fixer' Red, and Andy epitomizes why it is crucial to have dreams. His spirit and determination, leads us into a world full of imagination, filled with courage and desire. Will Andy ever realize his dreams?</summary>
+
+	<genres><genre>Publicite</genre><genre>Humour</genre></genres>
+
+	<actor><name><firstname>Tim</firstname>
+        <lastname>Robbins</lastname></name>
+        <role>Andy Dufresne</role>
+	</actor>
+	<actor><name><firstname>Morgan</firstname>
+        <lastname>Freeman</lastname></name>
+        <role>Ellis Boyd &#x27;Red&#x27; Redding</role>
+	</actor>
+	<actor><name><firstname>Bob</firstname>
+        <lastname>Gunton</lastname></name>
+        <role>Warden Norton</role>
+	</actor>
+	<actor><name><firstname>William</firstname>
+		<lastname>Sadler</lastname></name>
+		<role>Heywood</role>
+	</actor>
+
+	<directors>
+		<director><name><firstname>Frank</firstname><lastname>Darabont</lastname></name></director>
+	</directors>
+
+	<date>09/2010</date>
+
+	<runtime>2</runtime>
+
+	<language>fr</language>
+
+	<prixLocation>10</prixLocation>
+	<prixAchat>100</prixAchat>
+</movie>
+
+<movie id="tt0068646">
+	<title>Quebec Original Hiver</title>
+	<summary>The continuing saga of the Corleone crime family tells the story of a young Vito Corleone growing up in Sicily and in 1910s New York; and follows Michael Corleone in the 1950s as he attempts to expand the family business into Las Vegas, Hollywood and Cuba.</summary>
+	<genres><genre>Action</genre><genre>Comedie</genre></genres>
+	<actor><name><firstname>Marlon</firstname>
+        <lastname>Brando</lastname></name>
+        <role>Don Vito Corleone</role>
+	</actor>
+	<actor><name><firstname>Al</firstname>
+        <lastname>Pacino</lastname></name>
+        <role>Michael Corleone</role>
+	</actor>
+	<actor><name><firstname>James</firstname>
+        <lastname>Caan</lastname></name>
+        <role>Santino &#x27;Sonny&#x27; Corleone</role>
+	</actor>
+	<actor><name><firstname>Richard</firstname>
+        <lastname>S. Castellano</lastname></name>
+        <role>Peter Clemenza</role>
+	</actor>
+	<directors>
+		<director><name><firstname>Francis</firstname><lastname>Ford Coppola</lastname></name></director>
+	</directors>
+	
+	<date>07/2011</date>
+	
+	<runtime>4</runtime>
+
+	<language>de</language>
+	
+	<prixLocation>20</prixLocation>
+	<prixAchat>200</prixAchat>
+
+</movie>
+
+<movie id="tt0071562">
+	<title>Le poisson</title>
+	<summary> lgjoj sldugowblxiud oy osjh ui hdg, wjhigu,xuyfgqo z 9wkhj xjc pwhd cjgx ciuhw iucg xkhc igc x cv</summary>
+	<genres><genre>Horreur</genre></genres>
+	<actor><name><firstname>Al</firstname>
+        <lastname>Pacino</lastname></name>
+        <role>Don Michael Corleone</role>
+	</actor>
+	<actor><name><firstname>Robert</firstname>
+        <lastname>Duvall</lastname></name>
+        <role>Tom Hagen</role>
+	</actor>
+	<directors>
+		<director><name><firstname>Francis</firstname><lastname>Ford Coppola</lastname></name></director>
+	</directors>
+	<date>1974</date>
+	<runtime>200</runtime>
+	<language>it</language>
+	
+	<prixLocation>30</prixLocation>
+	<prixAchat>300</prixAchat>
+	
+</movie>
+
+
+</movies>
