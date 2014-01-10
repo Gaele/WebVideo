@@ -10,7 +10,8 @@ class Client extends \Library\Entity
 			$cleCarteBancaire,
 			$mail,
 			$nomDuTitulaire,
-			$dateInscription;
+			$dateInscription,
+			$dateExpiration;
 			
   
   const PSEUDONYME_INVALIDE =   1;
@@ -25,11 +26,12 @@ class Client extends \Library\Entity
   const MAIL_NOTSTRING =        10;
   const MAIL_INVALID =          11;
   const TITULAIRE_INVALIDE =    12;
+  const DATE_EXPIRATION_ABSURDE =    13;
   
   public function isValid()
   {
     return !(empty($this->pseudonyme) || empty($this->motDePasse) || empty($this->montantCharge) || empty($this->numeroCarteBanquaire) ||
-	empty($this->cleCarteBancaire) || empty($this->mail)|| empty($this->nomDuTitulaire));
+	empty($this->cleCarteBancaire) || empty($this->mail)|| empty($this->nomDuTitulaire) || empty($this->dateExpiration));
   }
   
   // SETTERS
@@ -168,6 +170,18 @@ class Client extends \Library\Entity
     $this->dateInscription = $date;
   }
   
+  public function setDateExpiration($date)
+  {
+    if( strtotime($date) <= strtotime('now') )
+	{
+      $this->erreurs[] = self::DATE_EXPIRATION_ABSURDE;
+	}
+	else
+	{
+      $this->dateExpiration = $date;
+	}
+  }
+  
   // GETTERS
   
   public function pseudonyme()
@@ -210,6 +224,11 @@ class Client extends \Library\Entity
     return $this->dateFinValidite;
   }
   
+  public function dateExpiration()
+  {
+    return $this->dateExpiration;
+  }
+  
   public function debug() {
 	echo "Pseudonyme: ".$this->pseudonyme."<br/>".
          "PassWd: ".$this->motDePasse."<br/>".
@@ -218,6 +237,7 @@ class Client extends \Library\Entity
 		 "cleCarte: ".$this->cleCarteBancaire."<br/>".
 		"mail: ".$this->mail."<br/>".
 		"Nom Titulaire: ".$this->nomDuTitulaire."<br/>".
-		"dateInscription: ".$this->dateInscription."<br/>";
+		"date Inscription: ".$this->dateInscription."<br/>".
+		"date Expiration: ".$this->dateExpiration."<br/>";
   }
 }

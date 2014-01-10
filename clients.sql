@@ -8,6 +8,7 @@
   `mail` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `nomDuTitulaire` varchar(50) COLLATE latin1_general_ci NOT NULL,
   `dateInscription` datetime NOT NULL,
+  `dateExpiration` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE (pseudonyme)
 ) DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci ;

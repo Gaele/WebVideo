@@ -41,6 +41,7 @@ class ConnexionController extends \Library\BackController
         'motDePasse' => $request->postData('motDePasse'),
 		'montantCharge' => $request->postData('montantCharge'),
 		'numeroCarteBanquaire' => $request->postData('numeroCarteBanquaire'),
+		'dateExpiration' => $request->postData('dateExpiration'),
 		'cleCarteBancaire' => $request->postData('cleCarteBancaire'),
 		'mail' => $request->postData('mail'),
 		'nomDuTitulaire' => $request->postData('nomDuTitulaire')
@@ -48,19 +49,19 @@ class ConnexionController extends \Library\BackController
 	  echo $client->debug();
       if ($client->isValid())
       {
-	    echo "valide";
-	//    if ($this->managers->getManagerOf('Clients')->isPseudoTaken($request->postData('pseudonyme')))
-	//    {
-	//		echo "pseudo deja pris";
-	//	}
-	//	else
-	//	{
-          $this->managers->getManagerOf('Clients')->save($client);
+		$manager = $this->managers->getManagerOf('Clients');
+	    if ($manager->isPseudoTaken($request->postData('pseudonyme')))
+	    {
+			echo "pseudo deja pris";
+		}
+		else
+		{
+          $manager->save($client);
         
           // $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
           $this->app->user()->setAuthenticated(true);
           $this->app->httpResponse()->redirect('.');
-	//	}
+		}
       }
       else
       {
