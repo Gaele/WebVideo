@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace Applications\Backend\Modules\News;
 
 class NewsController extends \Library\BackController
