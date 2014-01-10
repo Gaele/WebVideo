@@ -79,7 +79,7 @@ Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, 
 
 <h2>Le Poisson (2008)</h2>
 <div class="miniature" style="float:left;width:40%;">
-<img style="width:99%;" src="Web/videos/poster/PUB1.png" />
+<img style="width:99%;" src="Web/videos/poster/Le poisson.png" />
 </div>
 <p>
 <b>Duree</b> : 120 min
