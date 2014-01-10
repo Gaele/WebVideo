@@ -19,9 +19,12 @@ abstract class ClientsManager extends \Library\Manager
    */
   public function save(Client $client)
   {
+	$client->debug();
     if ($client->isValid())
     {
-      $client->isNew() ? $this->add($client) : $this->modify($client);
+		echo "valide client";
+      // $client->isNew() ? $this->add($client) : $this->modify($client);
+	  $this->add($client);
     }
     else
     {
@@ -30,9 +33,21 @@ abstract class ClientsManager extends \Library\Manager
   }
   
   /**
+   * Méthode permettant de savoir si un pseudonyme est deja pris ou non
+   * @return boolean
+   */
+  abstract public function isPseudoTaken($pseudo);
+  
+  /**
    * Méthode permettant de récupérer une liste de client.
    * @return array
    */
   abstract public function getListOf();
+  
+  /**
+   * Méthode permettant de savoir si un couple login-motDePasse est enregistre
+   * @return boolean
+   */
+  abstract public function hasSubscribed($pseudo, $pass);
   
 }

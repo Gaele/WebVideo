@@ -1,4 +1,3 @@
-pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, cleCarteBancaire, mail.
 <?php
 namespace Library\Entities;
 
@@ -22,14 +21,15 @@ class Client extends \Library\Entity
   const CARTE_WRONG_SIZE =      6;
   const CARTE_FAKE =            7;
   const CLE_INVALIDE =          8;
-  const MAIL_NOTSTRING =        9;
-  const MAIL_INVALID =          10;
-  const TITULAIRE_INVALIDE =    11;
+  const CLE_ABSCENTE =          9;
+  const MAIL_NOTSTRING =        10;
+  const MAIL_INVALID =          11;
+  const TITULAIRE_INVALIDE =    12;
   
-  // to check again ?
   public function isValid()
   {
-    return !(empty($this->pseudonyme) || empty($this->motDePasse));
+    return !(empty($this->pseudonyme) || empty($this->motDePasse) || empty($this->montantCharge) || empty($this->numeroCarteBanquaire) ||
+	empty($this->cleCarteBancaire) || empty($this->mail)|| empty($this->nomDuTitulaire));
   }
   
   // SETTERS
@@ -44,7 +44,6 @@ class Client extends \Library\Entity
     {
       $this->pseudonyme = $pseudo;
     }
-    $this->pseudo = $pseudo;
   }
   
   public function setMotDePasse($mdp)
@@ -61,18 +60,18 @@ class Client extends \Library\Entity
    
   public function setMontantCharge($montant)
   {
-    $this->numeroCarteBanquaire, = (int) $montant;
+    $this->numeroCarteBanquaire = (int) $montant;
 	if (empty($montant))
     {
       $this->erreurs[] = self::MONTANT_VIDE;
     }
-	else if (int)montant < 0)
+	else if ((int)$montant < 0)
 	{
 	  $this->erreurs[] = self::MONTANT_NEGATIF;
 	}
     else
     {
-      $this->montant = $montant;
+      $this->montantCharge = $montant;
     }
   }
            
@@ -86,10 +85,10 @@ class Client extends \Library\Entity
 	{
 		$this->erreurs[] = self::CARTE_WRONG_SIZE;
 	}
-	else if (!checkLuhn($numero))
-	{
-		$this->erreurs[] = self::CARTE_FAKE;
-	}
+//	else if (!$this->checkLuhn($numero))
+//	{
+//		$this->erreurs[] = self::CARTE_FAKE;
+//	}
     else
     {
       $this->numeroCarteBanquaire = $numero;
@@ -108,27 +107,31 @@ class Client extends \Library\Entity
 	 for($i = $nDigits-1; $i >= 0; $i--)
 	 {
 		$digit = intval($purportedCC[$i]);
-		if((i AND 1) == $parity) 
+		if(($i AND 1) == $parity) 
 		{
 			$digit *= 2;
 		}
 		if ($digit > 9) 
 		{
-			digit -= 9;
+			$digit -= 9;
 		}
-		$sum += digit;
+		$sum += $digit;
 	 }
-     return (($sum % 10) == 0)
+     return (($sum % 10) == 0);
   }
   
   public function setCleCarteBancaire($cle)
   {
-	if ((int)$cleCarteBancaire >= 1000)
+	if (empty($cle))
+	{
+	  $this->erreurs[] = self::CLE_ABSCENTE;
+	}
+	else if ((int)$cle >= 1000)
 	{
 	  $this->erreurs[] = self::CLE_INVALIDE;
 	} else
 	{
-	  $cleCarteBancaire; = (int) $cle;
+	  $this->cleCarteBancaire = (int) $cle;
 	}
   }
 
@@ -144,7 +147,7 @@ class Client extends \Library\Entity
 	}
     else
     {
-      $this->auteur = $auteur;
+      $this->mail = $mail;
     }
   }
   
@@ -156,7 +159,7 @@ class Client extends \Library\Entity
     }
     else
     {
-      $this->auteur = $auteur;
+      $this->nomDuTitulaire = $nomDuTitulaire;
     }
   }
   
@@ -205,5 +208,16 @@ class Client extends \Library\Entity
   public function dateInscription()
   {
     return $this->dateFinValidite;
+  }
+  
+  public function debug() {
+	echo "Pseudonyme: ".$this->pseudonyme."<br/>".
+         "PassWd: ".$this->motDePasse."<br/>".
+         "MontantCharge: ".$this->montantCharge."<br/>".
+         "numeroCarte: ".$this->numeroCarteBanquaire."<br/>".
+		 "cleCarte: ".$this->cleCarteBancaire."<br/>".
+		"mail: ".$this->mail."<br/>".
+		"Nom Titulaire: ".$this->nomDuTitulaire."<br/>".
+		"dateInscription: ".$this->dateInscription."<br/>";
   }
 }

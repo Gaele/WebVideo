@@ -12,7 +12,15 @@ class FrontendApplication extends \Library\Application
   
   public function run()
   {
-    $controller = $this->getController();
+    if ($this->user->isAuthenticated() || preg_match('`inscription$`', $this->httpRequest->requestURI(), $matches))
+    {
+      $controller = $this->getController();
+    }
+    else
+    {
+      $controller = new Modules\Connexion\ConnexionController($this, 'Connexion', 'index');
+    }
+  
     $controller->execute();
     
     $this->httpResponse->setPage($controller->page());

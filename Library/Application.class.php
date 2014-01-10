@@ -53,10 +53,10 @@ abstract class Application
     {
       if ($e->getCode() == \Library\Router::NO_ROUTE)
       {
-		echo ("Application.class.php DEBUG: url: ".$route->getAttribute('url').", module: ".$route->getAttribute('module').", action: ".$route->getAttribute('action'));
-		echo "<br/>";
-		echo $this->httpRequest->requestURI();
-		throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
+		//echo ("Application.class.php DEBUG: url: ".$route->getAttribute('url').", module: ".$route->getAttribute('module').", action: ".$route->getAttribute('action'));
+		//echo "<br/>";
+		//echo $this->httpRequest->requestURI();
+		//throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
         // Si aucune route ne correspond, c'est que la page demandée n'existe pas.
         $this->httpResponse->redirect404();
       }

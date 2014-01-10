@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
   <route url="/WebVideo/" module="News" action="index" />
+  <route url="/WebVideo/inscription" module="Connexion" action="inscription" />
+  <route url="/WebVideo/deconnexion.html" module="Connexion" action="deconnexion" />
   <route url="/WebVideo/news-([0-9]+)\.html" module="News" action="show" vars="id"/>
   <route url="/WebVideo/commenter-([0-9]+)\.html" module="News" action="insertComment" vars="news" />
 </routes>

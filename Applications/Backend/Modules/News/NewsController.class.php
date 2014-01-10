@@ -72,9 +72,6 @@ class NewsController extends \Library\BackController
 	$this->managers->getManagerOf('News')->delete($request->getData('id'));
 	$this->app->user()->setFlash('La news a bien ete supprimee !');
 	$this->app->httpResponse()->redirect('.');
-
   }
-  
-  
   
 }
