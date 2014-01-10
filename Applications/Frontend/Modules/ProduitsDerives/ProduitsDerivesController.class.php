@@ -1,7 +1,7 @@
 <?php
-namespace Applications\Frontend\Modules\Connexion;
+namespace Applications\Frontend\Modules\ProduitsDerives;
 
-class ConnexionController extends \Library\BackController
+class ProduitsDerivesController extends \Library\BackController
 {
   public function executeIndex(\Library\HTTPRequest $request)
   {
@@ -9,11 +9,12 @@ class ConnexionController extends \Library\BackController
     
 	if ($request->postExists('login'))
     {
-      $login = htmlspecialchars($request->postData('login'));
-      $password = htmlspecialchars($request->postData('password'));
+      $login = $request->postData('login');
+      $password = $request->postData('password');
       $manager = $this->managers->getManagerOf('Clients');
 	  if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
 	  {
+	    echo "Admin";
 	    $this->app->user()->setAdministrator(true);
 		$this->app->user()->setAuthenticated("Admin");
         $this->app->httpResponse()->redirect('.');
@@ -59,7 +60,7 @@ class ConnexionController extends \Library\BackController
           $manager->save($client);
         
           // $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
-          $this->app->user()->setAuthenticated(htmlspecialchars($request->postData('pseudonyme')));
+          $this->app->user()->setAuthenticated(true);
           $this->app->httpResponse()->redirect('.');
 		}
       }
@@ -82,23 +83,38 @@ class ConnexionController extends \Library\BackController
 	$this->app->httpResponse()->redirect('.');
   }
   
-  public function executeGestionCompte(\Library\HTTPRequest $request)
+  public function executeCartesPrePayees(\Library\HTTPRequest $request)
   {
-    $this->page->addVar('title', 'Gestion du compte');
+    $this->page->addVar('title', 'Cartes pre-payees');
     $pseudo = $this->app->user()->getAuthenticated();
 	$manager = $this->managers->getManagerOf('Clients');
 	$client = $manager->get($pseudo);
 	
-	if ($request->postExists('recharge'))
+	if ($request->postExists('offre'))
 	{
+		// if card still ok
 		if(strtotime($client->dateExpiration()) <= strtotime('now'))
 		{
 			$this->app->user()->setFlash("Carte bancaire passée de date, veuillez la mettre à jour !");
-		}
+		} // if can pay
+		else if((int)$request->postData('offre') > $client->montantCharge())
+		{
+			$this->app->user()->setFlash("Refusé : somme trop importante");
+		} // if the receiver exists
+		else if(!$manager->isPseudoTaken(htmlspecialchars($request->postData('receveur'))))
+		{
+			$this->app->user()->setFlash("Refusé : La personne recevant le cadeau n'existe pas");
+		} // it's ok
 		else
 		{
-			$client->setMontantCharge($client->montantCharge() + (int)$request->postData('recharge'));
+			$manager = $this->managers->getManagerOf('Clients');
+			$receveur = $manager->get(htmlspecialchars($request->postData('receveur')));
+			
+			$client->setMontantCharge($client->montantCharge() - (int)$request->postData('offre'));
+			$receveur->setMontantCharge($receveur->montantCharge() + (int)$request->postData('offre'));
 			$manager->update($client);
+			$manager->update($receveur);
+			$this->app->user()->setFlash("Vous avez bien offert une carte pre-payee a ".htmlspecialchars($receveur->pseudonyme()));
 		}
 	}
 	

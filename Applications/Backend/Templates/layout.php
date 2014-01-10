@@ -21,11 +21,15 @@
       
       <div  id="menu">
         <ul>
-		<?php if ($user->isAuthenticated()) { ?>
-          <li><a href="/WebVideo/">Videos</a></li>
-          <li><a href="/WebVideo/admin/">Mon Compte</a></li>
+		<?php if ($user->isAdministrator()) { ?>
+		  <li><a href="/WebVideo/">Videos</a></li>
+          <li><a href="/WebVideo/gestionCompte.html">Mon Compte</a></li>
           <li><a href="/WebVideo/admin/news-insert.html">Offrir un film</a></li>
-          <?php } ?>
+		  <li><a href="/WebVideo/deconnexion.html">Deconnexion</a></li>
+          <?php } else { ?>
+		  <li><a href="/WebVideo/inscription">Inscription</a></li>
+		  <li><a href="/WebVideo/">Connexion</a></li>
+		  <?php } ?>
         </ul>
       </div>
       

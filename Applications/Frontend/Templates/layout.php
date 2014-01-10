@@ -24,7 +24,7 @@
           <?php if ($user->isAuthenticated()) { ?>
 		  <li><a href="/WebVideo/">Videos</a></li>
           <li><a href="/WebVideo/gestionCompte.html">Mon Compte</a></li>
-          <li><a href="/WebVideo/admin/news-insert.html">Offrir un film</a></li>
+          <li><a href="/WebVideo/cartesPrePayees.html">Offrir un film</a></li>
 		  <li><a href="/WebVideo/deconnexion.html">Deconnexion</a></li>
           <?php } else { ?>
 		  <li><a href="/WebVideo/inscription">Inscription</a></li>

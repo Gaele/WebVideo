@@ -172,61 +172,61 @@ class Client extends \Library\Entity
   
   public function setDateExpiration($date)
   {
-    if( strtotime($date) <= strtotime('now') )
-	{
-      $this->erreurs[] = self::DATE_EXPIRATION_ABSURDE;
-	}
-	else
-	{
+    //if( strtotime($date) <= strtotime('now') )
+	//{
+    //  $this->erreurs[] = self::DATE_EXPIRATION_ABSURDE;
+	//}
+	//else
+	//{
       $this->dateExpiration = $date;
-	}
+	//}
   }
   
   // GETTERS
   
   public function pseudonyme()
   {
-    return $this->pseudonyme;
+    return htmlspecialchars($this->pseudonyme);
   }
   
   public function motDePasse()
   {
-    return $this->motDePasse;
+    return htmlspecialchars($this->motDePasse);
   }
   
   public function montantCharge()
   {
-    return $this->montantCharge;
+    return (int)$this->montantCharge;
   }
   
   public function numeroCarteBanquaire()
   {
-    return $this->numeroCarteBanquaire;
+    return htmlspecialchars($this->numeroCarteBanquaire);
   }
   
   public function cleCarteBancaire()
   {
-    return $this->cleCarteBancaire;
+    return (int)$this->cleCarteBancaire;
   }
   
   public function mail()
   {
-    return $this->mail;
+    return htmlspecialchars($this->mail);
   }
   
   public function nomDuTitulaire()
   {
-    return $this->nomDuTitulaire;
+    return htmlspecialchars($this->nomDuTitulaire);
   }
   
   public function dateInscription()
   {
-    return $this->dateInscription;
+    return htmlspecialchars($this->dateInscription);
   }
   
   public function dateExpiration()
   {
-    return $this->dateExpiration;
+    return htmlspecialchars($this->dateExpiration);
   }
   
   public function debug() {

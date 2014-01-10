@@ -70,7 +70,13 @@ class ClientsManager_PDO extends ClientsManager
 	$q->bindValue(':pseudo', $pseudo);
 	$q->execute();
 	
-	return new Client($q->fetch(\PDO::FETCH_ASSOC));
+	$result = $q->fetch(\PDO::FETCH_ASSOC);
+	if(!empty($result)) {
+		return new Client($result);
+	} else {
+		return null;
+	}
+	
   }
   
   // Met a jour le membres membres

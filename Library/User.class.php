@@ -17,10 +17,10 @@ class User extends ApplicationComponent
   
   public function getFlash()
   {
-    $flash = $_SESSION[User::FLASH_COOKIE];
+    $tmp = $_SESSION[User::FLASH_COOKIE];
     unset($_SESSION[User::FLASH_COOKIE]);
     
-    return $flash;
+    return $tmp;
   }
   
   public function hasFlash()

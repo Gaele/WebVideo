@@ -12,7 +12,7 @@ class BackendApplication extends \Library\Application
   
   public function run()
   {
-    if ($this->user->isAuthenticated())
+    if ($this->user->isAdministrator())
     {
       $controller = $this->getController();
     }

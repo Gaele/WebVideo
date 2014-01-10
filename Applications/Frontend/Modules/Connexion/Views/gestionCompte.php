@@ -6,6 +6,11 @@
 ?>
 
 </p>
+<?php
+	if($this->app->user()->hasFlash()) {
+		echo $this->app->user()->getFlash();
+	}
+?>
 <form action="" method="post">
   <legend>Recharger le compte</legend><br/>
   <?php if (isset($erreurs) && in_array(\Library\Entities\Client::PSEUDONYME_INVALIDE, $erreurs)) echo 'Le pseudonyme est vide.<br />'; ?>
