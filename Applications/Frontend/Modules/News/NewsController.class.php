@@ -5,44 +5,37 @@ class NewsController extends \Library\BackController
 {
   public function executeIndex(\Library\HTTPRequest $request)
   {
-    $nombreNews = $this->app->config()->get('nombre_news');
+  
+    $nombreFilms = $this->app->config()->get('nombre_news');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
     
     // On ajoute une définition pour le titre.
-    $this->page->addVar('title', 'Liste des '.$nombreNews.' dernières news');
+    $this->page->addVar('title', 'Liste des films');
     
-    // On récupère le manager des news.
-    $manager = $this->managers->getManagerOf('News');
+    // On récupère le manager des films.
+    $manager = $this->managers->getManagerOf('Film');
     
-	$listeNews = $manager->getList(0, $nombreNews);
-    
-    foreach ($listeNews as $news)
-    {
-      if (strlen($news->contenu()) > $nombreCaracteres)
-      {
-        $debut = substr($news->contenu(), 0, $nombreCaracteres);
-        $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-        
-        $news->setContenu($debut);
-      }
-    }
+	$films = $manager->getListOf((int)0, (int)$nombreFilms);
     
     // On ajoute la variable $listeNews à la vue.
-    $this->page->addVar('listeNews', $listeNews);
+    $this->page->addVar('films', $films);
+	$this->page->addVar('nombreCaracteres', $nombreCaracteres);
+	
   }
   
   public function executeShow(\Library\HTTPRequest $request)
   {
-    $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
-    
-    if (empty($news))
+    $film = $this->managers->getManagerOf('Film')->getUnique($request->getData('id'));
+    $loue = $this->managers->getManagerOf('Louer')->loue($this->app->user()->getAuthenticated(), $request->getData('id'));
+	
+    if (empty($film))
     {
       $this->app->httpResponse()->redirect404();
     }
     
-    $this->page->addVar('title', $news->titre());
-    $this->page->addVar('news', $news);
-    $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
+    $this->page->addVar('film', $film);
+	$this->page->addVar('loue', $loue);
+    // $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($film->id()));
   }
   
   public function executeInsertComment(\Library\HTTPRequest $request)

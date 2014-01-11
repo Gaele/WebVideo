@@ -1,4 +1,3 @@
-
 <?php
 namespace Library\Entities;
 
@@ -7,8 +6,8 @@ class Film extends \Library\Entity
   protected $titre,
             $description,
 			$genre, 
-			$acteurs = array(),
-			$realisateurs = array(),
+			$acteurs,
+			$realisateurs,
 			$dateDeSortie,
 			$langue,
 			$duree,
@@ -37,7 +36,7 @@ class Film extends \Library\Entity
 	}
 	else 
 	{
-		$this->titre = $titre;	
+		$this->titre = $titre;
 	}
   }
    
@@ -65,28 +64,28 @@ class Film extends \Library\Entity
 	}
   }
   
-  public function setActeurs(array $acteurs)
+  public function setActeurs($acteurs)
   {
-//	if (!is_string($acteurs) || empty($acteurs))
-//	{
-//      $this->erreurs[] = self::ACTEURS_INVALIDE;		
-//	}
-//	else 
-//	{
+	if (!is_string($acteurs) || empty($acteurs))
+	{
+      $this->erreurs[] = self::ACTEURS_INVALIDE;		
+	}
+	else 
+	{
 		$this->acteurs = $acteurs;	
-//	}
+	}
   }
   
-  public function setRealisateurs(array $realisateurs)
+  public function setRealisateurs($realisateurs)
   {
-//	if (!is_string($realisateurs) || empty($realisateurs))
-//	{
-//      $this->erreurs[] = self::REALISATEURS_INVALIDE;		
-//	}
-//	else 
-//	{
+	if (!is_string($realisateurs) || empty($realisateurs))
+	{
+      $this->erreurs[] = self::REALISATEURS_INVALIDE;		
+	}
+	else 
+	{
 		$this->realisateurs = $realisateurs;	
-//	}
+	}
   }
   
   public function setDateDeSortie($dateDeSortie)
@@ -114,21 +113,22 @@ class Film extends \Library\Entity
   }
   
   
-  public function setDuree($duree)
+  public function setDuree($d)
   {
-	if (!empty($duree) || (int)$duree <= 0)
+	if (empty($d) || (int)$d <= 0)
 	{
       $this->erreurs[] = self::DUREE_INVALIDE;		
+	  
 	}
 	else 
 	{
-		$this->duree = (int)$duree;	
+		$this->duree = (int)$d;	
 	}
   }
   
   public function setPrixLocation($prixLocation)
   {
-	if (!empty($prixLocation) || (int)$prixLocation <= 0)
+	if (empty($prixLocation) || (int)$prixLocation <= 0)
 	{
       $this->erreurs[] = self::DUREE_INVALIDE;		
 	}
@@ -140,7 +140,7 @@ class Film extends \Library\Entity
   
   public function setPrixAchat($prixAchat)
   {
-	if (!empty($prixAchat) || (int)$prixAchat <= 0)
+	if (empty($prixAchat) || (int)$prixAchat <= 0)
 	{
       $this->erreurs[] = self::DUREE_INVALIDE;		
 	}
@@ -206,8 +206,39 @@ class Film extends \Library\Entity
     return $this->prixAchat;
   }
   
+  // retourne la date formatee pour les humains (le ... a ...)
+		
+		
+		public function formatedYear() {
+			if(date('Y-m-d H:i:s', strtotime($this->dateDeSortie)) == $this->dateDeSortie) { // La date est dans le bon format
+				$DateAFormater = explode(' ', $this->dateDeSortie()); // contient {'AAAA-MM-JJ', 'HH-II-SS'}
+				$calendar = explode('-', $DateAFormater[0]); // contient {'AAAA', 'MM', 'JJ'}
+				$clock = explode(':', $DateAFormater[1]); // contient {'HH', 'II', 'SS'}
+				
+				// return 'Le '.
+				return $calendar[0];//.'/'.$calendar[1].'/'.$calendar[0];//.' a '.$clock[0].'h'.$clock[1].'min'.$clock[2].'s';
+			} else { // La date n'a pas le bon format
+				echo 'erreur : date incorrecte';
+				echo $this->dateDeSortie;
+				echo '<br/>';
+				return null;
+			}
+		}
+		
+		public function formatedYearAndMonth() {
+			if(date('Y-m-d H:i:s', strtotime($this->dateDeSortie)) == $this->dateDeSortie) { // La date est dans le bon format
+				$DateAFormater = explode(' ', $this->dateDeSortie()); // contient {'AAAA-MM-JJ', 'HH-II-SS'}
+				$calendar = explode('-', $DateAFormater[0]); // contient {'AAAA', 'MM', 'JJ'}
+				$clock = explode(':', $DateAFormater[1]); // contient {'HH', 'II', 'SS'}
+				
+				// return 'Le '.
+				return $calendar[1].'/'.$calendar[0];//.'/'.$calendar[0];//.' a '.$clock[0].'h'.$clock[1].'min'.$clock[2].'s';
+			} else { // La date n'a pas le bon format
+				echo 'erreur : date incorrecte';
+				echo $this->dateDeSortie;
+				echo '<br/>';
+				return null;
+			}
+		}
   
-  
-  
-  
-  
+}

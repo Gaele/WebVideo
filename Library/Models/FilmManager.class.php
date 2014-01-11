@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 namespace Library\Models;
 
 use \Library\Entities\Film;
@@ -7,11 +7,16 @@ abstract class FilmManager extends \Library\Manager
 {
   
   /**
-   * MÃ©thode permettant de rÃ©cupÃ©rer une liste de client.
+   * Méthode permettant de récupérer une liste de client.
    * @return array
    */
-  abstract public function getListOf();
+  abstract public function getListOf($first, $last);
   
-
+  /*
+   * Methode retourne la video d'id $id
+   * @return Video
+   *
+   */
+  abstract public function getUnique($id);
   
 }
