@@ -9,7 +9,7 @@
     
     <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
     
-    <link rel="stylesheet" href="Web/css/Envision.css" type="text/css" />
+    <link rel="stylesheet" href="Web/css/Envision.css?v=1" type="text/css" />
   </head>
   
   <body>
@@ -21,7 +21,9 @@
       
       <div  id="menu">
         <ul>
-          <?php if ($user->isAuthenticated()) { ?>
+		  <?php if ($user->isAdministrator()) { ?>
+		  <li><a href="/WebVideo/admin/">Administration</a></li>
+          <?php } else if ($user->isAuthenticated()) { ?>
 		  <li><a href="/WebVideo/">Videos</a></li>
           <li><a href="/WebVideo/gestionCompte.html">Mon Compte</a></li>
           <li><a href="/WebVideo/cartesPrePayees.html">Offrir un film</a></li>

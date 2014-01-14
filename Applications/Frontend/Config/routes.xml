@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-  <route url="/WebVideo/" module="News" action="index" />
+  <route url="/WebVideo/" module="News" action="index3" />
   <route url="/WebVideo/inscription" module="Connexion" action="inscription" />
   <route url="/WebVideo/deconnexion.html" module="Connexion" action="deconnexion" />
   <route url="/WebVideo/gestionCompte.html" module="Connexion" action="gestionCompte" />
@@ -9,4 +9,6 @@
   <route url="/WebVideo/achat-([0-9]+)\.html" module="News" action="achat" vars="id" />
   <route url="/WebVideo/location-([0-9]+)\.html" module="News" action="location" vars="id" />
   <route url="/WebVideo/commenter-([0-9]+)\.html" module="News" action="insertComment" vars="news" />
+  
+  
 </routes>

@@ -1,27 +1,54 @@
 <?php
 namespace Applications\Frontend\Modules\News;
 
+use \Xml\XmlLoader;
+
 class NewsController extends \Library\BackController
 {
-  public function executeIndex(\Library\HTTPRequest $request)
+
+  public function executeIndex3(\Library\HTTPRequest $request)
   {
-  
-    $nombreFilms = $this->app->config()->get('nombre_news');
-    $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
-    
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Liste des films');
-    
-    // On récupère le manager des films.
-    $manager = $this->managers->getManagerOf('Film');
-    
-	$films = $manager->getListOf((int)0, (int)$nombreFilms);
-    
-	$this->general();
 	
+	$nombreFilms = $this->app->config()->get('nombre_news');
+	$xmlLoader = new XmlLoader();
+
+	$filmManager = $this->managers->getManagerOf('Film');
+	$films = $filmManager->getListOf((int)0, (int)$nombreFilms);
+	
+	# LOAD XML FILE 
+	$XML = $xmlLoader->ajoutTitre($films);
+	
+	# START XSLT
+	$xslt = new \XSLTProcessor();
+	$XSL = new \DOMDocument();
+	$XSL->load( 'Xml/listeVideos4.xsl', LIBXML_NOCDATA);
+	$xslt->importStylesheet( $XSL );
+	
+	$PL = $request->postData('id');
+	if($PL != null && is_numeric($PL)) {
+		$prixLocation = (int)$PL;
+	} else {
+		$prixLocation = "99999";
+	}
+	$TITRE = $request->postData('titre');
+	if(($TITRE != null) and ($TITRE != "")) {
+		$titre = $TITRE;
+	} else {
+		$titre = '';
+	}
+
+	$xslt->setParameter('', 'pl', $prixLocation);
+	$xslt->setParameter('', 't', $titre);
+	
+	#PRINT
+	$result = $xslt->transformToXML( $XML );
+	
+	$this->page->addVar('result', $result);
     // On ajoute la variable $listeNews à la vue.
-    $this->page->addVar('films', $films);
-	$this->page->addVar('nombreCaracteres', $nombreCaracteres);
+    // $this->page->addVar('films', $films);
+	// $this->page->addVar('nombreCaracteres', $nombreCaracteres);
 	
   }
   
@@ -42,6 +69,51 @@ class NewsController extends \Library\BackController
 	}
 	
     // $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf($film->id()));
+  }
+  
+  public function executeShow2(\Library\HTTPRequest $request)
+  {
+    // On ajoute une définition pour le titre.
+    $this->page->addVar('title', 'Page d\'un film');
+	
+	$nombreFilms = $this->app->config()->get('nombre_news');
+	$xmlLoader = new XmlLoader();
+
+	$film = $this->managers->getManagerOf('Film')->getUnique($request->getData('id'));
+	
+	# LOAD XML FILE 
+	$XML = $xmlLoader->ajoutTitre($films);
+	
+	# START XSLT
+	$xslt = new \XSLTProcessor();
+	$XSL = new \DOMDocument();
+	$XSL->load( 'Xml/listeVideos4.xsl', LIBXML_NOCDATA);
+	$xslt->importStylesheet( $XSL );
+	
+	$PL = $request->postData('id');
+	if($PL != null && is_numeric($PL)) {
+		$prixLocation = (int)$PL;
+	} else {
+		$prixLocation = "99999";
+	}
+	$TITRE = $request->postData('titre');
+	if(($TITRE != null) and ($TITRE != "")) {
+		$titre = $TITRE;
+	} else {
+		$titre = '';
+	}
+
+	$xslt->setParameter('', 'pl', $prixLocation);
+	$xslt->setParameter('', 't', $titre);
+	
+	#PRINT
+	$result = $xslt->transformToXML( $XML );
+	
+	$this->page->addVar('result', $result);
+    // On ajoute la variable $listeNews à la vue.
+    // $this->page->addVar('films', $films);
+	// $this->page->addVar('nombreCaracteres', $nombreCaracteres);
+	
   }
   
   public function executeInsertComment(\Library\HTTPRequest $request)
