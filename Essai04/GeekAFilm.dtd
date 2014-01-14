@@ -1,0 +1,17 @@
+﻿<!ELEMENT movies       (movie*)>
+<!ELEMENT movie        (title,summary, genres, actor*, directors, date, runtime, language, prixLocation, prixAchat) >
+<!ATTLIST movie        id ID #REQUIRED >
+<!ELEMENT title        (#PCDATA)>
+<!ELEMENT summary         (#PCDATA)>
+<!ELEMENT genres         (genre*)>
+<!ELEMENT genre          (#PCDATA)>
+<!ELEMENT actor        (name,role)>
+<!ELEMENT directors    (director*)>
+<!ELEMENT director     (name)>
+<!ELEMENT date    (#PCDATA)>
+<!ELEMENT runtime      (#PCDATA)>
+<!ELEMENT language      (fr|it|de)>
+<!ELEMENT prixLocation      (#PCDATA)>
+<!ELEMENT prixAchat      (#PCDATA)>
+<!ELEMENT poster      (#PCDATA)>
+
