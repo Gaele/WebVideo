@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace Library\Entities;
 
 class Louer extends \Library\Entity
@@ -65,6 +65,24 @@ class Louer extends \Library\Entity
   {
     return $this->dateFin;
   }
-    
+
+  /*
+	public function formatedYear() {
+		if(date('Y-m-d H:i:s', strtotime($this->dateFin)) == $this->dateFin) { // La date est dans le bon format
+			$DateAFormater = explode(' ', $this->dateFin()); // contient {'AAAA-MM-JJ', 'HH-II-SS'}
+			$calendar = explode('-', $DateAFormater[0]); // contient {'AAAA', 'MM', 'JJ'}
+			$clock = explode(':', $DateAFormater[1]); // contient {'HH', 'II', 'SS'}
+			
+			// return 'Le '.
+			return $calendar[0].'/'.$calendar[1].'/'.$calendar[0].' a '.$clock[0].'h'.$clock[1].'min'.$clock[2].'s';
+		} else { // La date n'a pas le bon format
+			echo 'erreur : date incorrecte';
+			echo $this->dateFin;
+			echo '<br/>';
+			return null;
+		}
+	}
+	*/
+  
 }
 

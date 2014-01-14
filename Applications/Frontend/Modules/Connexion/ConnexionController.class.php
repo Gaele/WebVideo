@@ -20,6 +20,7 @@ class ConnexionController extends \Library\BackController
 	  }
       else if ($manager->hasSubscribed($login, $password))
       {
+	    $this->app->user()->setAdministrator(false);
         $this->app->user()->setAuthenticated($login);
         $this->app->httpResponse()->redirect('.');
       }

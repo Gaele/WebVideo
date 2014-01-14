@@ -1,12 +1,13 @@
-<p style="text-align: center">Il y a actuellement <?php echo $nombreNews; ?> news. En voici la liste :</p>
+<p style="text-align: center">Il y a actuellement <?php echo $nombreFilms; ?> films. En voici la liste :</p>
 
 <table>
-  <tr><th>Auteur</th><th>Titre</th><th>Date d'ajout</th><th>Dernière modification</th><th>Action</th></tr>
+<tr><th>Titre</th><th>Realisateurs</th><th>prix Location</th><th>prix Achat</th><th>Duree</th></tr>
 <?php
-// $dir = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'\Web\images\\';
-foreach ($listeNews as $news)
+
+foreach ($listeFilms as $film)
 {
-  echo '<tr><td>', $news['auteur'], '</td><td>', $news['titre'], '</td><td>le ', $news['dateAjout']->format('d/m/Y à H\hi'), '</td><td>', ($news['dateAjout'] == $news['dateModif'] ? '-' : 'le '.$news['dateModif']->format('d/m/Y à H\hi')), '</td><td><a href="news-update-', $news['id'], '.html"><img src="../Web/images/update.png" alt="Modifier" /></a> <a href="news-delete-', $news['id'], '.html"><img src="../Web/images/delete.png" alt="Supprimer" /></a></td></tr>', "\n";
+  echo '<tr><td>', $film['titre'], '</td><td>', $film['realisateurs'], '</td><td>', $film['prixLocation'], '</td><td>', $film['prixAchat'], '</td><td><a href="film-update-', $film['id'], '.html"><img src="../Web/images/update.png" alt="Modifier" /></a> <a href="film-delete-', $film['id'], '.html"><img src="../Web/images/delete.png" alt="Supprimer" /></a></td></tr>', "\n";
 }
+echo 'Ajouter un film : <a href="film-insert.html"><img src="../Web/images/update.png" alt="Ajouter" /></a>';
 ?>
 </table>

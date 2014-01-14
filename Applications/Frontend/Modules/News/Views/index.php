@@ -1,21 +1,4 @@
 
-<!--
-<?php
-//foreach ($listeNews as $news)
-//{
-?>
-  <h2><a href="news-
-  <?php //echo $news['id']; ?>
-  .html">
-  <?php //echo $news['titre']; ?>
-  </a></h2>
-  <p>
-  <?php //echo nl2br($news['contenu']); ?>
-  </p>
-<?php
-//}
-?>
--->
 </a>
 <form action="" method="post">
           <legend><h1>Je recherche</h1></legend>
@@ -56,6 +39,11 @@ else
 		echo'<h2><a href="news-'.$film->id().'.html">'.$film->titre();
 		echo ' ('.$film->formatedYear();
 		echo ')</a></h2>';
+		foreach($locations as $location) {
+			if($film->id() == $location->idFilm()) {
+				echo "<span style='color:blue;'>loue jusqu'a ".$location->dateFin()."</span>";
+			}
+		}
 		echo '<div class="miniature" style="float:left;width:40%;">';
 		echo '<img style="width:99%;" src="Web/videos/poster/'.$film->titre().'.png" />';
 		echo '</div><p><b>Duree</b> : '.$film->duree();

@@ -26,6 +26,12 @@ class Film extends \Library\Entity
 	const PRIX_ACHAT_INVALIDE = 10;
   
   
+  public function isValid()
+  {
+    return !(empty($this->titre) || empty($this->description) || empty($this->genre) || empty($this->acteurs) ||
+	empty($this->realisateurs) || empty($this->dateDeSortie)|| empty($this->langue) || empty($this->duree) || empty($this->prixLocation) || empty($this->prixAchat));
+  }
+  
   // SETTERS
   
   public function setTitre($titre)
@@ -159,6 +165,13 @@ class Film extends \Library\Entity
   public function titre()
   {
     return $this->titre;
+  }
+  
+  public function titreAvecBarres()
+  {
+    $titreAvecBarres = $this->titre;
+	str_replace(" ", "_", $this->titreAvecBarres);
+	return $titreAvecBarres;
   }
   
   public function description()
