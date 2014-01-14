@@ -229,7 +229,7 @@ class Client extends \Library\Entity
     return htmlspecialchars($this->dateExpiration);
   }
   
-  public function debug() {
+  public function debugClient() {
 	echo "Pseudonyme: ".$this->pseudonyme."<br/>".
          "PassWd: ".$this->motDePasse."<br/>".
          "MontantCharge: ".$this->montantCharge."<br/>".
@@ -239,5 +239,7 @@ class Client extends \Library\Entity
 		"Nom Titulaire: ".$this->nomDuTitulaire."<br/>".
 		"date Inscription: ".$this->dateInscription."<br/>".
 		"date Expiration: ".$this->dateExpiration."<br/>";
+		// throw new \InvalidArgumentException('DEBUG');
   }
+  
 }

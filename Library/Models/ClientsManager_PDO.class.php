@@ -6,8 +6,17 @@ use \Library\Entities\Client;
 class ClientsManager_PDO extends ClientsManager
 {
 
+  public function count()
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM clients')->fetchColumn();
+  }
+
   protected function add(Client $client)
   {
+    if($this->isPseudoTaken($client->pseudonyme())) {
+		//throw new \InvalidArgumentException('DEBUG');
+		return "Erreur : pseudonyme déjà pris !";
+	}
     $q = $this->dao->prepare('INSERT INTO clients SET pseudonyme = :pseudo, motDePasse = :mdp, montantCharge = :montant, numeroCarteBanquaire = :numeroCarte, 
 	cleCarteBancaire = :cle, mail = :mail, nomDuTitulaire = :nomTitulaire, dateExpiration = :dateExpiration, dateInscription = NOW()');
     
@@ -23,6 +32,27 @@ class ClientsManager_PDO extends ClientsManager
     $q->execute();
     
     $client->setId($this->dao->lastInsertId());
+	return "";
+  }
+  
+  protected function modify(Client $news)
+  {
+    $requete = $this->dao->prepare('UPDATE clients SET pseudonyme = :pseudonyme, motDePasse = :motDePasse, montantCharge = :montantCharge,
+	numeroCarteBanquaire = :numeroCarteBanquaire, cleCarteBancaire = :cleCarteBancaire, mail = :mail, nomDuTitulaire = :nomDuTitulaire, dateInscription = :dateInscription,
+	dateExpiration = :dateExpiration WHERE id = :id');
+    
+    $requete->bindValue(':pseudonyme', $news->pseudonyme());
+    $requete->bindValue(':motDePasse', $news->motDePasse());
+    $requete->bindValue(':montantCharge', $news->montantCharge());
+	$requete->bindValue(':numeroCarteBanquaire', $news->numeroCarteBanquaire());
+	$requete->bindValue(':cleCarteBancaire', $news->cleCarteBancaire());
+	$requete->bindValue(':mail', $news->mail());
+	$requete->bindValue(':nomDuTitulaire', $news->nomDuTitulaire());
+	$requete->bindValue(':dateInscription', $news->dateInscription());
+	$requete->bindValue(':dateExpiration', $news->dateExpiration());
+	$requete->bindValue(':id', (int)$news->id(), \PDO::PARAM_INT);
+    
+    $requete->execute();
   }
   
   /**
@@ -40,18 +70,10 @@ class ClientsManager_PDO extends ClientsManager
   public function getListOf()
   {
     $q = $this->dao->prepare('SELECT id, pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, cleCarteBancaire, mail, nomDuTitulaire, dateInscription, dateExpiration FROM clients');
-	
     $q->execute();
     
-    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Clients');
-    
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Client');
     $clients = $q->fetchAll();
-    
-    foreach ($clients as $client)
-    {
-      $client->setDate(new \DateTime($client->date()));
-    }
-    
     return $clients;
   }
   
@@ -65,19 +87,33 @@ class ClientsManager_PDO extends ClientsManager
   }
   
   public function get($pseudo) {
-    $q = $this->dao->prepare('SELECT pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, 
+    $q = $this->dao->prepare('SELECT id, pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, 
 	cleCarteBancaire, mail, nomDuTitulaire, dateExpiration, dateInscription FROM clients where pseudonyme = :pseudo');
 	$q->bindValue(':pseudo', $pseudo);
 	$q->execute();
 	
-	$result = $q->fetch(\PDO::FETCH_ASSOC);
-	if(!empty($result)) {
-		return new Client($result);
-	} else {
-		return null;
-	}
-	
+	$q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Client');
+	if ($client = $q->fetch())
+    {
+      return $client;
+    }
+    return null;
   }
+  
+  public function getUnique($id) {
+    $q = $this->dao->prepare('SELECT id, pseudonyme, motDePasse, montantCharge, numeroCarteBanquaire, 
+	cleCarteBancaire, mail, nomDuTitulaire, dateExpiration, dateInscription FROM clients WHERE id = :id');
+	$q->bindValue(':id', (int)$id, \PDO::PARAM_INT);
+	$q->execute();
+	
+	$q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Client');
+	if ($client = $q->fetch())
+    {
+      return $client;
+    }
+    return null;
+  }
+  
   
   // Met a jour le membres membres
 	public function update(Client $client) {
@@ -134,5 +170,10 @@ class ClientsManager_PDO extends ClientsManager
 			$q->bindValue(':dateExpiration', $dateExpiration);
 		$q->execute();
 	}
+	
+	public function delete($id)
+  {
+    $this->dao->exec('DELETE FROM clients WHERE id = '.(int) $id);
+  }
  
 }

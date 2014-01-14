@@ -1,2 +1,2 @@
-<h2>Ajouter une news</h2>
+<h2>Ajouter un film</h2>
 <?php require '_formFilm.php';

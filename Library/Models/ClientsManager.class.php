@@ -5,26 +5,34 @@ use \Library\Entities\Client;
 
 abstract class ClientsManager extends \Library\Manager
 {
+
+  /**
+   * Méthode comptant le nombre de clients
+   * @return int
+   */
+  abstract public function count();
+
   /**
    * Méthode permettant d'ajouter un client.
    * @param $client Le client à ajouter
-   * @return void
+   * @return String pour les erreurs, null sinon
    */
   abstract protected function add(Client $client);
   
   /**
    * Méthode permettant d'enregistrer un client.
    * @param $client Le client à enregistrer
-   * @return void
+   * @return String (pour les erreurs)
    */
   public function save(Client $client)
   {
-	$client->debug();
     if ($client->isValid())
     {
-		echo "valide client";
-      // $client->isNew() ? $this->add($client) : $this->modify($client);
-	  $this->add($client);
+		if($client->isNew()) {
+			return $this->add($client);
+		} else {
+			return $this->modify($client);
+		}
     }
     else
     {
@@ -53,10 +61,25 @@ abstract class ClientsManager extends \Library\Manager
 
   /**
    * Return the person with the given pseudonyme
+   * @param $pseudo String the pseudonyme
    * @return client
    */
-  abstract public function get($pseudo);
+  abstract public function getUnique($pseudo);
 
+  /**
+   * Return the person with the given id
+   * @param $id Integer the id of the person
+   * @return client
+   */
+  abstract public function get($id);
+  
+
+    /**
+   * Méthode permettant de supprimer un client.
+   * @param $id Int L'identifiant du client à supprimer
+   * @return void
+   */
+  abstract function delete($id);
 
   
 }

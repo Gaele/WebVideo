@@ -1,29 +1,35 @@
-<?php 
+<?php
 namespace Applications\Backend\Modules\News;
 
 class NewsController extends \Library\BackController
 {
-  public function executeIndex(\Library\HTTPRequest $request)
+  public function executeFilmIndex(\Library\HTTPRequest $request)
   {
     $this->page->addVar('title', 'Gestion des Films');
-    
-    $manager = $this->managers->getManagerOf('News');
+	
 	$managerFilm = $this->managers->getManagerOf('Film');
 	
-    $this->page->addVar('listeNews', $manager->getList());
 	$this->page->addVar('listeFilms', $managerFilm->getListOf());
-    $this->page->addVar('nombreNews', $manager->count());
 	$this->page->addVar('nombreFilms', $managerFilm->count());
   }
   
-  public function executeInsert(\Library\HTTPRequest $request)
+  public function executeClientIndex(\Library\HTTPRequest $request)
   {
-    if ($request->postExists('auteur'))
-    {
-      $this->processForm($request);
-    }
+    $this->page->addVar('title', 'Gestion des Clients');
     
-    $this->page->addVar('title', 'Ajout d\'une news');
+	$managerFilm = $this->managers->getManagerOf('Clients');
+	
+	$this->page->addVar('listeData', $managerFilm->getListOf());
+	$this->page->addVar('nombreData', $managerFilm->count());
+  }
+  
+  public function executeClientInsert(\Library\HTTPRequest $request)
+  {
+    if ($request->postExists('pseudonyme'))
+    {
+      $this->processFormClient($request);
+    }
+    $this->page->addVar('title', 'Ajout d\'un client');
   }
   
   public function executeFilmInsert(\Library\HTTPRequest $request)
@@ -36,13 +42,19 @@ class NewsController extends \Library\BackController
     $this->page->addVar('title', 'Ajout d\'un film');
   }
   
-  public function processForm(\Library\HTTPRequest $request)
+  public function processFormClient(\Library\HTTPRequest $request)
   {
-    $news = new \Library\Entities\News(
+    $news = new \Library\Entities\Client(
       array(
-        'auteur' => $request->postData('auteur'),
-        'titre' => $request->postData('titre'),
-        'contenu' => $request->postData('contenu')
+        'pseudonyme' => $request->postData('pseudonyme'),
+        'motDePasse' => $request->postData('motDePasse'),
+        'montantCharge' => $request->postData('montantCharge'),
+        'numeroCarteBanquaire' => $request->postData('numeroCarteBanquaire'),
+        'cleCarteBancaire' => $request->postData('cleCarteBancaire'),
+        'mail' => $request->postData('mail'),
+        'nomDuTitulaire' => $request->postData('nomDuTitulaire'),
+        'dateInscription' => $request->postData('dateInscription'),
+        'dateExpiration' => $request->postData('dateExpiration')
       )
     );
     
@@ -54,12 +66,17 @@ class NewsController extends \Library\BackController
     
     if ($news->isValid())
     {
-      $this->managers->getManagerOf('News')->save($news);
-      
-      $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
+      $erreur = $this->managers->getManagerOf('Clients')->save($news);
+	  if($erreur != "") {
+	    $this->app->user()->setFlash($erreur);
+	  } else {
+        $this->app->user()->setFlash($news->isNew() ? 'Le client a bien été ajoutée !' : 'Le client a bien été modifiée !');
+	  }
     }
     else
     {
+		echo "NEWS INVALIDE";
+		echo $news->debugClient();
       $this->page->addVar('erreurs', $news->erreurs());
     }
     
@@ -102,18 +119,18 @@ class NewsController extends \Library\BackController
     $this->page->addVar('film', $news);
   }
   
-  public function executeUpdate(\Library\HTTPRequest $request)
+  public function executeClientUpdate(\Library\HTTPRequest $request)
   {
-    if ($request->postExists('auteur'))
+    if ($request->postExists('pseudonyme'))
     {
-      $this->processForm($request);
+      $this->processFormClient($request);
     }
     else
     {
-      $this->page->addVar('film', $this->managers->getManagerOf('Film')->getUnique($request->getData('id')));
+      $this->page->addVar('news', $this->managers->getManagerOf('Clients')->getUnique($request->getData('id')));
     }
     
-    $this->page->addVar('title', 'Modification d\'une news');
+    $this->page->addVar('title', 'Modification d\'un client');
   }
   
   public function executeFilmUpdate(\Library\HTTPRequest $request)
@@ -130,11 +147,11 @@ class NewsController extends \Library\BackController
     $this->page->addVar('title', 'Modification d\'un film');
   }
   
-  public function executeDelete(\Library\HTTPRequest $request)
+  public function executeClientDelete(\Library\HTTPRequest $request)
   {
-	$this->managers->getManagerOf('News')->delete($request->getData('id'));
-	$this->app->user()->setFlash('La news a bien ete supprimee !');
-	$this->app->httpResponse()->redirect('.');
+	$this->managers->getManagerOf('Clients')->delete($request->getData('id'));
+	$this->app->user()->setFlash('Le client a bien ete supprimee !');
+	$this->app->httpResponse()->redirect('client');
   }
   
   public function executeFilmDelete(\Library\HTTPRequest $request)

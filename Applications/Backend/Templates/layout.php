@@ -16,14 +16,15 @@
     <div id="wrap">
       <div id="header">
         <h1 id="logo-text"><a href="/WebVideo/">Geek un film</a></h1>
-        <p id="slogan">Louez, achetez, offrez</p>
+        <p id="slogan">Partie administration des données</p>
       </div>
       
       <div  id="menu">
         <ul>
 		<?php if ($user->isAdministrator()) { ?>
+		  <li><a href="/WebVideo/admin/client">Gestion Clients</a></li>
 		  <li><a href="/WebVideo/admin/">Gestion Films</a></li>
-		  <li><a href="/WebVideo/">Retour la partie publique</a></li>
+		  <li><a href="/WebVideo/">Partie publique</a></li>
 		  <li><a href="/WebVideo/deconnexion.html">Deconnexion</a></li>
           <?php } else { ?>
 		  <li><a href="/WebVideo/inscription">Inscription</a></li>

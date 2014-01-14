@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <routes>
-	<route url="/WebVideo/admin/" module="News" action="index" />
-	<route url="/WebVideo/admin/news-insert\.html" module="News" action="insert" />
+	<route url="/WebVideo/admin/" module="News" action="filmIndex" />
+	<route url="/WebVideo/admin/client" module="News" action="clientIndex" />
+	<route url="/WebVideo/admin/client-insert\.html" module="News" action="clientInsert" />
 	<route url="/WebVideo/admin/film-insert\.html" module="News" action="filmInsert" />
-	<route url="/WebVideo/admin/news-update-([0-9]+)\.html" module="News" action="update" vars="id" />
+	<route url="/WebVideo/admin/client-update-([0-9]+)\.html" module="News" action="clientUpdate" vars="id" />
 	<route url="/WebVideo/admin/film-update-([0-9]+)\.html" module="News" action="filmUpdate" vars="id" />
-	<route url="/WebVideo/admin/news-delete-([0-9]+)\.html" module="News" action="delete" vars="id" />
+	<route url="/WebVideo/admin/client-delete-([0-9]+)\.html" module="News" action="clientDelete" vars="id" />
 	<route url="/WebVideo/admin/film-delete-([0-9]+)\.html" module="News" action="filmDelete" vars="id" />
 </routes>
 
