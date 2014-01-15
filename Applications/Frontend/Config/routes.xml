@@ -6,6 +6,7 @@
   <route url="/WebVideo/gestionCompte.html" module="Connexion" action="gestionCompte" />
   <route url="/WebVideo/cartesPrePayees.html" module="ProduitsDerives" action="cartesPrePayees" />
   <route url="/WebVideo/news-([0-9]+)\.html" module="News" action="show" vars="id"/>
+  <route url="/WebVideo/news2-([0-9]+)\.html" module="News" action="show2" vars="id"/>
   <route url="/WebVideo/achat-([0-9]+)\.html" module="News" action="achat" vars="id" />
   <route url="/WebVideo/location-([0-9]+)\.html" module="News" action="location" vars="id" />
   <route url="/WebVideo/commenter-([0-9]+)\.html" module="News" action="insertComment" vars="news" />

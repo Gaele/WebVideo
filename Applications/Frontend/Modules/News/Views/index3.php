@@ -1,10 +1,11 @@
+
 	<form action="" method="post">
           <legend><h1>Je recherche</h1></legend>
   <p>
     <label>Prix Location <=</label>
     <input type="text" name="prixLocation" value="<?php if (isset($_POST['prixLocation'])) echo htmlspecialchars($_POST['prixLocation']); ?>" /><br />
     
-    <label>Titre</label>
+    <label>Titre (contient)</label>
 	<input type="text" name="titre" value="<?php if (isset($_POST['titre'])) echo htmlspecialchars($_POST['titre']); ?>" /><br />
     <br/>
 	<input type="submit" value="Chercher" />

@@ -9,7 +9,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 					<h2>
 						<xsl:element name="a">
 							<xsl:attribute name="href">
-								news-<xsl:value-of select="@id" />.html
+								news2-<xsl:value-of select="@id" />.html
 							</xsl:attribute>
 							<xsl:value-of select="title"/> ( <xsl:value-of select="date"/> )
 							

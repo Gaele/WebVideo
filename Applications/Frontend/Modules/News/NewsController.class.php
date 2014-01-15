@@ -76,35 +76,38 @@ class NewsController extends \Library\BackController
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Page d\'un film');
 	
-	$nombreFilms = $this->app->config()->get('nombre_news');
-	$xmlLoader = new XmlLoader();
-
-	$film = $this->managers->getManagerOf('Film')->getUnique($request->getData('id'));
+	$film = array();
+	$film[] = $this->managers->getManagerOf('Film')->getUnique($request->getData('id'));
+	if (empty($film))
+    {
+      $this->app->httpResponse()->redirect404();
+    }
 	
+	
+	$xmlLoader = new XmlLoader();
 	# LOAD XML FILE 
-	$XML = $xmlLoader->ajoutTitre($films);
+	$XML = $xmlLoader->ajoutTitre($film);
 	
 	# START XSLT
 	$xslt = new \XSLTProcessor();
 	$XSL = new \DOMDocument();
-	$XSL->load( 'Xml/listeVideos4.xsl', LIBXML_NOCDATA);
+	$XSL->load( 'Xml/show.xsl', LIBXML_NOCDATA);
 	$xslt->importStylesheet( $XSL );
 	
-	$PL = $request->postData('id');
-	if($PL != null && is_numeric($PL)) {
-		$prixLocation = (int)$PL;
+	$userName = $this->app->user()->getAuthenticated();
+	$userManager = $this->managers->getManagerOf('Clients');
+	$user = $userManager->get($userName);
+	if($user != null) {
+		$loue = $this->managers->getManagerOf('Louer')->loue($user->id(), $request->getData('id'));
+		if($loue != null) {
+			$xslt->setParameter('', 'loue', 1);
+		} else {
+			$xslt->setParameter('', 'loue', 0);
+		}
 	} else {
-		$prixLocation = "99999";
+		$xslt->setParameter('', 'loue', 0);
 	}
-	$TITRE = $request->postData('titre');
-	if(($TITRE != null) and ($TITRE != "")) {
-		$titre = $TITRE;
-	} else {
-		$titre = '';
-	}
-
-	$xslt->setParameter('', 'pl', $prixLocation);
-	$xslt->setParameter('', 't', $titre);
+	
 	
 	#PRINT
 	$result = $xslt->transformToXML( $XML );
@@ -215,7 +218,7 @@ class NewsController extends \Library\BackController
 			$user->setMontantCharge($user->montantCharge() - $film->prixLocation());
 			$userManager->update($user);
 			
-			$loue = $this->managers->getManagerOf('Louer')->location($userName, $request->getData('id'));
+			$loue = $this->managers->getManagerOf('Louer')->location($user->id(), $request->getData('id'));
 			$this->page->addVar('loue', $loue);
 			
 			$this->app->user()->setFlash("Location effectuée");

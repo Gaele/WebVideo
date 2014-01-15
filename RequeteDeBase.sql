@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Ven 10 Janvier 2014 à 23:15
+-- Généré le : Mer 15 Janvier 2014 à 01:21
 -- Version du serveur: 5.5.20
 -- Version de PHP: 5.3.10
 
@@ -39,15 +39,18 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `dateExpiration` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pseudonyme` (`pseudonyme`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `clients`
 --
 
 INSERT INTO `clients` (`id`, `pseudonyme`, `motDePasse`, `montantCharge`, `numeroCarteBanquaire`, `cleCarteBancaire`, `mail`, `nomDuTitulaire`, `dateInscription`, `dateExpiration`) VALUES
-(1, 'vincent', 'vanhecke', 2587, '2587', 123, 'vincent.vanheck@gmail.com', 'vincent', '2014-01-10 07:22:36', '2014-01-24 00:00:00'),
-(2, 'Benji', 'tari', 856, '856', 234, 'benji.tari@gmail.com', 'benji', '2014-01-10 10:54:53', '2014-01-31 00:00:00');
+(1, 'vincent', 'vanhecke', 447, '447', 123, 'vincent.vanheck@gmail.com', 'vincent', '0000-00-00 00:00:00', '2015-00-00 00:00:00'),
+(2, 'Benji', 'tari', 2256, '1234567876543456', 234, 'benji.tari@gmail.com', 'benji', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'admin', 'mdp', 100, '1234567890987654', 876, 'vincent.bertrand.pascal.vanhecke@gmail.com', 'vincent', '2014-01-14 10:00:00', '2014-02-20 00:00:00'),
+(4, 'kim', 'nguyen', 90, '1234567898870654', 234, 'kim@lri.fr', 'kim', '2012-00-00 00:00:00', '2015-00-00 00:00:00'),
+(10, 'Chichou', 'chichou', 2000, '1234567890987654', 534, 'chichou@mgil.fd', 'fhihl', '2014-01-14 19:07:27', '2015-12-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -91,15 +94,16 @@ CREATE TABLE IF NOT EXISTS `film` (
   `prixLocation` int(50) NOT NULL,
   `prixAchat` int(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `film`
 --
 
 INSERT INTO `film` (`id`, `titre`, `description`, `genre`, `acteurs`, `realisateurs`, `langue`, `duree`, `dateDeSortie`, `prixLocation`, `prixAchat`) VALUES
-(1, 'Quebec Original Hiver', 'Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit, sic in amicum sit animatus. Quam multa enim, quae nostra causa numquam faceremus, facimus causa amicorum! precari ab indigno, supplicare, tum acerbius in aliquem invehi insectarique vehementius, quae in nostris rebus non satis honeste, in amicorum fiunt honestissime; multaeque res sunt in quibus de suis commodis viri boni multa detrahunt detrahique patiuntur, ut iis amici potius quam ipsi fruantur.', 'Action,Cinéma', 'Jean Reve,Paul Apeine', 'Yves Net,Margo Bacc', 'fr', 20, '2010-01-14 00:00:00', 10, 100),
-(3, 'Le poisson', 'Le poisson est-il fais pour tout le monde ?', 'Marketing', 'Jean poisson', 'Marmotte Audi', 'de', 5, '2007-01-11 00:00:00', 30, 300);
+(1, 'Quebec Original Hiver', 'Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit, sic in amicum sit animatus. Quam multa enim, quae nostra causa numquam faceremus, facimus causa amicorum! precari ab indigno, supplicare, tum acerbius in aliquem invehi insectarique vehementius, quae in nostris rebus non satis honeste, in amicorum fiunt honestissime; multaeque res sunt in quibus de suis commodis viri boni multa detrahunt detrahique patiuntur, ut iis amici potius quam ipsi fruantur.', 'Action', 'Jean Reve,Paul Apeine', 'Yves Net,Margo Bacc', 'fr', 20, '2010-01-14 00:00:00', 10, 100),
+(3, 'Le poisson', 'Le poisson est-il frais pour tout le monde ?', 'Marketing', 'Jean poisson', 'Marmotte Audi', 'de', 5, '2007-01-11 00:00:00', 30, 300),
+(4, 'Quebec Original Ete', 'Harum trium sententiarum nulli prorsus assentior. Nec enim illa prima vera est, ut, quem ad modum in se quisque sit, sic in amicum sit animatus. Quam multa enim, quae nostra causa numquam faceremus, facimus causa amicorum! precari ab indigno, supplicare, tum acerbius in aliquem invehi insectarique vehementius, quae in nostris rebus non satis honeste, in amicorum fiunt honestissime; multaeque res sunt in quibus de suis commodis viri boni multa detrahunt detrahique patiuntur, ut iis amici potius quam ipsi fruantur.', 'Action', 'Lucile Hartman', 'Arthur Bec', 'fr', 2, '2010-01-19 00:00:00', 10, 100);
 
 -- --------------------------------------------------------
 
@@ -112,6 +116,14 @@ CREATE TABLE IF NOT EXISTS `louer` (
   `idFilm` smallint(5) unsigned NOT NULL,
   `dateFin` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Contenu de la table `louer`
+--
+
+INSERT INTO `louer` (`idClient`, `idFilm`, `dateFin`) VALUES
+(1, 1, '2014-01-17 01:58:04'),
+(1, 1, '2014-01-17 01:58:09');
 
 -- --------------------------------------------------------
 
